@@ -1,4 +1,5 @@
 import pytest
+from typing import Callable
 from unittest.mock import Mock, patch 
 from pydeco.decorators.retry import retry
 
@@ -54,7 +55,7 @@ def test_custom_exception_filtering() -> None:
 
 
 @patch("time.sleep")
-def test_delay_and_backoff(mock_sleep) -> None:
+def test_delay_and_backoff(mock_sleep: Callable) -> None:
     mock_func = Mock(side_effect=[Exception(), Exception(), "ok"])
 
     @retry(times=3, delay=1, backoff_multiplier=2)
@@ -67,4 +68,21 @@ def test_delay_and_backoff(mock_sleep) -> None:
     assert mock_func.call_count == 3
     assert mock_sleep.call_args_list == [((1,),), ((2,),)]
 
-test_delay_and_backoff()
+
+def test_callback() -> None:
+    mock_func = Mock(side_effect=[Exception("fail"), "ok"])
+    mock_callback = Mock()
+
+    @retry(times=3, callback=mock_callback)
+    def wrapped() -> str:
+        return mock_func()
+    
+    result = wrapped()
+
+    assert result == "ok"
+    assert mock_func.call_count == 2
+    assert mock_callback.call_count == 1
+    assert mock_callback.call_args[0][0] == 1 
+    assert isinstance(mock_callback.call_args[0][1], Exception)
+    assert str(mock_callback.call_args[0][1]) == "fail"
+
