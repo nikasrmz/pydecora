@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 from pydeco.decorators.timeit import timeit
 
 @patch('logging.log')
-def test_no_parameters(mock_log: Callable) -> None:
+def test_no_parameters(mock_log: Callable):
 
     @timeit()
     def wrapped():
@@ -21,7 +21,7 @@ def test_no_parameters(mock_log: Callable) -> None:
 
 
 @patch('logging.log')
-def test_label(mock_log: Callable) -> None:
+def test_label(mock_log: Callable):
 
     @timeit(label="test_func")
     def wrapped():
@@ -36,7 +36,7 @@ def test_label(mock_log: Callable) -> None:
 
 
 @patch('logging.log')
-def test_log_args(mock_log: Callable) -> None:
+def test_log_args(mock_log: Callable):
 
     @timeit(log_args=True)
     def wrapped(a, b, *, c):
@@ -51,7 +51,7 @@ def test_log_args(mock_log: Callable) -> None:
 
 
 @patch('logging.log')
-def test_log_args_no_args(mock_log: Callable) -> None:
+def test_log_args_no_args(mock_log: Callable):
 
     @timeit(log_args=True)
     def wrapped():
@@ -66,7 +66,7 @@ def test_log_args_no_args(mock_log: Callable) -> None:
 
 
 @patch('logging.log')
-def test_log_result(mock_log: Callable) -> None:
+def test_log_result(mock_log: Callable):
 
     @timeit(log_result=True)
     def wrapped():
@@ -81,7 +81,7 @@ def test_log_result(mock_log: Callable) -> None:
      
 
 @patch('logging.log')
-def test_log_level(mock_log: Callable) -> None:
+def test_log_level(mock_log: Callable):
 
     @timeit(log_level=logging.DEBUG)
     def wrapped():
@@ -96,12 +96,12 @@ def test_log_level(mock_log: Callable) -> None:
 
 
 @patch('logging.log')
-def test_unit(mock_log: Callable) -> None:
+def test_unit(mock_log: Callable):
 
     @timeit(unit="ms")
     def wrapped():
         pass
-    
+
     wrapped()
 
     cleaned = re.sub(r"\d+\.\d+", "", mock_log.call_args[0][1])
@@ -110,12 +110,11 @@ def test_unit(mock_log: Callable) -> None:
     assert cleaned == "wrapped() took ms"
 
 
-@patch('logging.log')
-def test_unit_unknown(mock_log: Callable) -> None:
+def test_unit_unknown():
 
     @timeit(unit="unknown")
     def wrapped():
         return "ok"
-    
+
     with pytest.raises(ValueError, match="'unknown' is an unknown unit"):
         wrapped()

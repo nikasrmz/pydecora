@@ -1,5 +1,6 @@
 import time
 import logging
+from functools import wraps
 from typing import Optional, Literal, Callable
 
 
@@ -11,8 +12,22 @@ def timeit(
     unit: Literal["ms", "s"] = "s",
 ) -> Callable:
 
+    """A decorator that logs the execution time of a function.
+
+    Optionally includes arguments, result, custom label, and time unit.
+    Useful for performance diagnostics and debugging.
+
+    :param label: Optional custom label to use instead of the function
+        name.
+    :param log_args: If True, logs function arguments.
+    :param log_result: If True, logs the returned value of the function.
+    :param log_level: Logging level to use (e.g., logging.INFO,
+        logging.DEBUG).
+    :param unit: Unit for measuring execution time: "s" (seconds) or
+        "ms" (milliseconds).
+    """
+
     def dec(fn: Callable):
-        from functools import wraps
 
         @wraps(fn)
         def inner(*args, **kwargs):
