@@ -4,9 +4,10 @@ from typing import Callable
 from unittest.mock import Mock, patch
 from pydeco.decorators.suppress import suppress
 
+
 def test_no_exception():
     mock_func = Mock(return_value="ok")
-    
+
     @suppress(Exception)
     def wrapped():
         return mock_func()
@@ -34,9 +35,10 @@ def test_non_matching_exception():
     @suppress(ValueError, default_value="value")
     def wrapped():
         return mock_func()
-    
+
     with pytest.raises(TypeError, match="fail"):
         wrapped()
+
 
 @patch("pydeco.decorators.suppress.logging.log")
 def test_logging_enabled(mock_log: Callable):
@@ -45,9 +47,10 @@ def test_logging_enabled(mock_log: Callable):
     @suppress(ValueError, default_value="value", log=True)
     def wrapped():
         return mock_func()
-    
+
     wrapped()
 
     assert mock_log.call_args[1]["level"] == logging.INFO
-    assert mock_log.call_args[1]["msg"] == "fail was raised, returning default_value=value"
-
+    assert (
+        mock_log.call_args[1]["msg"] == "fail was raised, returning default_value=value"
+    )

@@ -5,13 +5,14 @@ from typing import Callable
 from unittest.mock import Mock, patch
 from pydeco.decorators.timeit import timeit
 
-@patch('logging.log')
+
+@patch("logging.log")
 def test_no_parameters(mock_log: Callable):
 
     @timeit()
     def wrapped():
         pass
-    
+
     wrapped()
 
     cleaned = re.sub(r"\d+\.\d+", "", mock_log.call_args[0][1])
@@ -20,13 +21,13 @@ def test_no_parameters(mock_log: Callable):
     assert cleaned == "wrapped() took s"
 
 
-@patch('logging.log')
+@patch("logging.log")
 def test_label(mock_log: Callable):
 
     @timeit(label="test_func")
     def wrapped():
         pass
-    
+
     wrapped()
 
     cleaned = re.sub(r"\d+\.\d+", "", mock_log.call_args[0][1])
@@ -35,7 +36,7 @@ def test_label(mock_log: Callable):
     assert cleaned == "test_func() took s"
 
 
-@patch('logging.log')
+@patch("logging.log")
 def test_log_args(mock_log: Callable):
 
     @timeit(log_args=True)
@@ -43,14 +44,14 @@ def test_log_args(mock_log: Callable):
         pass
 
     wrapped(10, 20, c=30)
-    
+
     cleaned = re.sub(r"\d+\.\d+", "", mock_log.call_args[0][1])
 
     assert mock_log.call_args[0][0] == logging.INFO
     assert cleaned == "wrapped(10, 20, c=30) took s"
 
 
-@patch('logging.log')
+@patch("logging.log")
 def test_log_args_no_args(mock_log: Callable):
 
     @timeit(log_args=True)
@@ -58,35 +59,35 @@ def test_log_args_no_args(mock_log: Callable):
         pass
 
     wrapped()
-    
+
     cleaned = re.sub(r"\d+\.\d+", "", mock_log.call_args[0][1])
 
     assert mock_log.call_args[0][0] == logging.INFO
     assert cleaned == "wrapped() took s"
 
 
-@patch('logging.log')
+@patch("logging.log")
 def test_log_result(mock_log: Callable):
 
     @timeit(log_result=True)
     def wrapped():
         return "ok"
-    
+
     wrapped()
 
     cleaned = re.sub(r"\d+\.\d+", "", mock_log.call_args[0][1])
 
     assert mock_log.call_args[0][0] == logging.INFO
     assert cleaned == "wrapped() took s and returned: \n ok"
-     
 
-@patch('logging.log')
+
+@patch("logging.log")
 def test_log_level(mock_log: Callable):
 
     @timeit(log_level=logging.DEBUG)
     def wrapped():
         pass
-    
+
     wrapped()
 
     cleaned = re.sub(r"\d+\.\d+", "", mock_log.call_args[0][1])
@@ -95,7 +96,7 @@ def test_log_level(mock_log: Callable):
     assert cleaned == "wrapped() took s"
 
 
-@patch('logging.log')
+@patch("logging.log")
 def test_unit(mock_log: Callable):
 
     @timeit(unit="ms")

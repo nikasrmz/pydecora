@@ -1,6 +1,6 @@
 import pytest
 from typing import Callable
-from unittest.mock import Mock, patch 
+from unittest.mock import Mock, patch
 from pydeco.decorators.retry import retry
 
 
@@ -10,7 +10,7 @@ def test_succeed_first_try():
     @retry(times=3)
     def wrapped():
         return mock_func()
-    
+
     result = wrapped()
     assert result == "ok"
     assert mock_func.call_count == 1
@@ -22,7 +22,7 @@ def test_succeed_third_try():
     @retry(times=3)
     def wrapped():
         return mock_func()
-    
+
     result = wrapped()
     assert result == "ok"
     assert mock_func.call_count == 3
@@ -34,7 +34,7 @@ def test_all_attempts_fail():
     @retry(times=3)
     def wrapped():
         return mock_func()
-    
+
     with pytest.raises(Exception, match="fail"):
         wrapped()
 
@@ -47,7 +47,7 @@ def test_custom_exception_filtering():
     @retry(times=3, exceptions=(ValueError, KeyError))
     def wrapped():
         return mock_func()
-    
+
     with pytest.raises(Exception, match="fail"):
         wrapped()
 
@@ -61,7 +61,7 @@ def test_delay_and_backoff(mock_sleep: Callable):
     @retry(times=3, delay=1, backoff_multiplier=2)
     def wrapped():
         return mock_func()
-    
+
     result = wrapped()
 
     assert result == "ok"
@@ -76,13 +76,12 @@ def test_callback():
     @retry(times=3, callback=mock_callback)
     def wrapped():
         return mock_func()
-    
+
     result = wrapped()
 
     assert result == "ok"
     assert mock_func.call_count == 2
     assert mock_callback.call_count == 1
-    assert mock_callback.call_args[0][0] == 1 
+    assert mock_callback.call_args[0][0] == 1
     assert isinstance(mock_callback.call_args[0][1], Exception)
     assert str(mock_callback.call_args[0][1]) == "fail"
-

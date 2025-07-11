@@ -25,7 +25,7 @@ def cache(
         cache_dict: OrderedDict = OrderedDict()
 
         def is_outdated(key):
-            return ttl and (time() - cache_dict[key][0]) > ttl
+            return ttl and key in cache_dict and (time() - cache_dict[key][0]) > ttl
 
         @wraps(fn)
         def inner(*args, **kwargs):

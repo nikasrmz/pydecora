@@ -11,7 +11,6 @@ def timeit(
     log_level: int = logging.INFO,
     unit: Literal["ms", "s"] = "s",
 ) -> Callable:
-
     """A decorator that logs the execution time of a function.
 
     Optionally includes arguments, result, custom label, and time unit.

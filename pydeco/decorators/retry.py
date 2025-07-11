@@ -5,15 +5,14 @@ from typing import Callable, Any, Optional
 
 
 def retry(
-        times: int,
-        exceptions: tuple[type[Exception]] = (Exception,),
-        delay: float = 0,
-        backoff_multiplier: float = 1,
-        delay_cap: float = 30 * 60,
-        jitter: float = 0,
-        callback: Optional[Callable[[int, Exception], None]] = None,
+    times: int,
+    exceptions: tuple[type[Exception]] = (Exception,),
+    delay: float = 0,
+    backoff_multiplier: float = 1,
+    delay_cap: float = 30 * 60,
+    jitter: float = 0,
+    callback: Optional[Callable[[int, Exception], None]] = None,
 ) -> Callable:
-
     """A decorator that retries a function call upon specified exceptions.
 
     Retries up to `times` times, with optional delay, exponential backoff, jitter,
@@ -48,4 +47,5 @@ def retry(
             return fn(*args, **kwargs)
 
         return inner
+
     return dec
