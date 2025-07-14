@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pydecora"
-version = "1.0.1"
+version = "1.0.2"
 description = "A lightweight and modular Python decorator library"
-readme = "README.md"
+readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
 authors = [
-  { name = "Nika Sharmazanashvili", email = "your-email@example.com" }
+  { name = "Nika Sharmazanashvili", email = "nikasharmaza@gmail.com" }
 ]
 keywords = ["decorators", "python", "utilities", "cache", "retry", "timeit"]
 classifiers = [
@@ -24,11 +24,10 @@ Homepage = "https://github.com/nikasrmz/pydecora"
 Repository = "https://github.com/nikasrmz/pydecora"
 
 [tool.setuptools]
-packages = ["pydecora"]
 include-package-data = true
+package-data = { "*" = [] }
+exclude-package-data = { "*" = ["tests*", "tests/*"] }
 
-[tool.setuptools.package-data]
-"*" = []
+[tool.setuptools.packages.find]
+where = ["."]
 
-[tool.setuptools.exclude-package-data]
-"*" = ["tests*", "tests/*"]
