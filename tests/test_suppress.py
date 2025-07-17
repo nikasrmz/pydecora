@@ -2,7 +2,7 @@ import pytest
 import logging
 from typing import Callable
 from unittest.mock import Mock, patch
-from pydeco.decorators.suppress import suppress
+from pydecora.decorators.suppress import suppress
 
 
 def test_no_exception():
@@ -40,7 +40,7 @@ def test_non_matching_exception():
         wrapped()
 
 
-@patch("pydeco.decorators.suppress.logging.log")
+@patch("pydecora.decorators.suppress.logging.log")
 def test_logging_enabled(mock_log: Callable):
     mock_func = Mock(side_effect=ValueError("fail"))
 

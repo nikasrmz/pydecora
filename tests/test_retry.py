@@ -1,7 +1,7 @@
 import pytest
 from typing import Callable
 from unittest.mock import Mock, patch
-from pydeco.decorators.retry import retry
+from pydecora.decorators.retry import retry
 
 
 def test_succeed_first_try():

@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import Mock
-from pydeco.decorators.validate_args import validate_args
+from pydecora.decorators.validate_args import validate_args
 from typing import List, Dict, Tuple, Optional, Union
 
 

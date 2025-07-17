@@ -3,7 +3,7 @@ import logging
 import pytest
 from typing import Callable
 from unittest.mock import Mock, patch
-from pydeco.decorators.timeit import timeit
+from pydecora.decorators.timeit import timeit
 
 
 @patch("logging.log")

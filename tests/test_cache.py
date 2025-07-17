@@ -1,6 +1,6 @@
 import time
 from unittest.mock import Mock
-from pydeco.decorators.cache import cache
+from pydecora.decorators.cache import cache
 
 
 def test_default_parameters():
