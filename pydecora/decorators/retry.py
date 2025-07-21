@@ -1,12 +1,12 @@
 from random import uniform
 import time
 from functools import wraps
-from typing import Callable, Any, Optional
+from typing import Callable, Any, Optional, Tuple, Type
 
 
 def retry(
     times: int,
-    exceptions: tuple[type[Exception]] = (Exception,),
+    exceptions: Tuple[Type[Exception]] = (Exception,),
     delay: float = 0,
     backoff_multiplier: float = 1,
     delay_cap: float = 30 * 60,

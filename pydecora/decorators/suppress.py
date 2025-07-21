@@ -1,10 +1,10 @@
 import logging
 from functools import wraps
-from typing import Any, Callable, Tuple, Type
+from typing import Any, Callable, Tuple, Type, Union
 
 
 def suppress(
-    exceptions: Type[Exception] | Tuple[Type[Exception]],
+    exceptions: Union[Type[Exception], Tuple[Type[Exception]]],
     default_value: Any = None,
     log: bool = False,
     log_level: int = logging.INFO,
