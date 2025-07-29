@@ -2,7 +2,7 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/pydecora)](https://pypi.org/project/pydecora/)
 
-A lightweight and modular Python decorator library that helps you write cleaner and more expressive code.
+A lightweight and modular Python library containing some useful decorators.
 
 ## 🚀 Features
 
