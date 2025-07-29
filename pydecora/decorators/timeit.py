@@ -1,7 +1,7 @@
-import time
 import logging
+import time
 from functools import wraps
-from typing import Optional, Literal, Callable
+from typing import Callable, Literal, Optional
 
 
 def timeit(
@@ -42,7 +42,7 @@ def timeit(
             if log_args and (args or kwargs):
                 args_string = [str(arg) for arg in args]
                 kwargs_string = [f"{k}={v}" for k, v in kwargs.items()]
-                params_string = f"{', '.join(args_string)}, {', '.join(kwargs_string)}"
+                params_string = ", ".join([*args_string, *kwargs_string])
             else:
                 params_string = ""
 

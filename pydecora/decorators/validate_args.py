@@ -1,7 +1,8 @@
 import inspect
 import logging
-from typing import Any, Callable, Iterable, Type, get_origin, Union, get_args
 from functools import wraps
+from typing import Any, Callable, Iterable, Type, Union, get_args, get_origin
+
 
 def validate_args(
     check_return: bool = False,

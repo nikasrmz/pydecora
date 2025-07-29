@@ -1,7 +1,7 @@
-from random import uniform
 import time
 from functools import wraps
-from typing import Callable, Any, Optional, Tuple, Type
+from random import uniform
+from typing import Any, Callable, Optional, Tuple, Type
 
 
 def retry(

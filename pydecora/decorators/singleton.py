@@ -1,5 +1,6 @@
-from typing import Any, Type
 from functools import wraps
+from typing import Any, Type
+
 
 def singleton(cls: Type[Any]):
     """A class decorator that ensures only one instance of the decorated class
