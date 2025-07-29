@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pydecora"
-version = "1.1.1"
+version = "1.1.2"
 description = "A lightweight and modular Python decorator library"
 readme = {file = "README.md", content-type = "text/markdown"}
-requires-python = ">=3.8"
+requires-python = ">=3.6"
 license = { file = "LICENSE" }
 authors = [
   { name = "Nika Sharmazanashvili", email = "nikasharmaza@gmail.com" }
